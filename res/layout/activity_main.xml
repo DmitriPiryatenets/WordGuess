@@ -11,6 +11,14 @@
         android:layout_centerHorizontal="true"
         android:orientation="horizontal" />
 
+    <com.injoit.wordguessing.SymbolButtonLine
+        android:id="@+id/sybmolButtonLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal" />
+
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
@@ -27,9 +35,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="137dp"
+        android:layout_marginBottom="130dp"
         android:onClick="removeSymbol"
         android:text="remove symbol" />
-    
-    
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="90dp"
+        android:onClick="getWord"
+        android:text="getWord" />
+
 </RelativeLayout>

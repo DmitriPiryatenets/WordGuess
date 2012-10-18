@@ -13,6 +13,7 @@ public class GuessLine extends LinearLayout {
 
 	private int currentSymbolIndex = 0;
 	private String word;
+	private boolean isAllowToGetWholeWord = false;
 
 	private List<GuessCharObject> list = new ArrayList<GuessCharObject>();
 
@@ -51,7 +52,6 @@ public class GuessLine extends LinearLayout {
 		updateImage();
 	}
 
-
 	public void clearGuessCharElementList() {
 		list.clear();
 		updateImage();
@@ -65,18 +65,21 @@ public class GuessLine extends LinearLayout {
 			tmp.setCharObject(gco);
 			addView(tmp);
 		}
+		isAllowToGetWholeWord();
 	}
-	
+
 	public void setCurrentSymbol(String symbol) {
 		if (!(currentSymbolIndex < list.size()))
 			return;
 		GuessCharObject gco = list.get(currentSymbolIndex);
-		if (gco.isSpace()){
+		if (!gco.isSpace()) {
+			gco.setCurrentCharSymbol(symbol);
+			list.set(currentSymbolIndex, gco);
 			currentSymbolIndex++;
+		} else {
+			currentSymbolIndex++;
+			setCurrentSymbol(symbol);
 		}
-		gco.setCurrentCharSymbol(symbol);
-		list.set(currentSymbolIndex, gco);
-		currentSymbolIndex++;
 		updateImage();
 	}
 
@@ -85,13 +88,43 @@ public class GuessLine extends LinearLayout {
 			return;
 		currentSymbolIndex--;
 		GuessCharObject gco = list.get(currentSymbolIndex);
-//		if (gco.isSpace()){
-//			currentSymbolIndex--;
-//		}
-//		gco = list.get(currentSymbolIndex);
+
+//		System.out.println("gco isspace: " + gco.isSpace());
+
+		if (gco.isSpace()) {
+			currentSymbolIndex--;
+		}
+
+		gco = list.get(currentSymbolIndex);
 		gco.setCurrentCharSymbol(null);
 		list.set(currentSymbolIndex, gco);
 		updateImage();
+	}
+
+	public boolean isAllowToGetWholeWord() {
+		System.out.println(currentSymbolIndex + " " + list.size());
+		if (currentSymbolIndex == list.size())
+			isAllowToGetWholeWord = true;
+		else
+			isAllowToGetWholeWord = false;
+		return isAllowToGetWholeWord;
+	}
+
+	public String getComplitedWord() {
+		String toReturn = "";
+		if (isAllowToGetWholeWord) {
+			for (int i = 0; i < list.size(); i++) {
+				if (list.get(i).isSpace())
+					toReturn += " ";
+				else
+					toReturn += list.get(i).getCurrentCharSymbol();
+			}
+		}
+		return toReturn;
+	}
+
+	public String getWord() {
+		return word;
 	}
 
 }

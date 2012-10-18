@@ -26,7 +26,7 @@ public class GuessCharElement extends Button{
 	
 	public void setCharObject(GuessCharObject gco){
 		guessCharObject = gco;
-		System.out.println(gco);
+//		System.out.println(gco);
 		updateImage();
 	}
 	

@@ -11,6 +11,8 @@ import android.view.View;
 public class MainActivity extends Activity {
 	
 	private GuessLine gl;
+	
+	private int i = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,7 +28,7 @@ public class MainActivity extends Activity {
 //        	list.add(gce);
 //        	gl.setGuessCharObjectList(list);
 //        }
-        gl.setWord("ab de");
+        gl.setWord("aaaa");
     }
 
     @Override
@@ -37,10 +39,21 @@ public class MainActivity extends Activity {
     
     public void addSymbol(View view){
     	gl.setCurrentSymbol("a");
+    	i++;
     }
 
     public void removeSymbol(View view){
     	gl.removeLastElement();
+    }
+    
+    public void getWord(View view){
+    	System.out.println("gl.isAllowToGetWholeWord(): " + gl.isAllowToGetWholeWord());
+    	if (gl.isAllowToGetWholeWord()){
+    		String word = gl.getComplitedWord();
+    		System.out.println("gl.word: " + word);
+    		System.out.println(gl.getComplitedWord());
+    		System.out.println(gl.getWord());
+    	}
     }
     
 }
